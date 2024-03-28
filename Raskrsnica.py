@@ -1,5 +1,5 @@
 import random
-
+from Vozilo import Vozilo
 
 class Raskrsnica:
 
@@ -13,7 +13,7 @@ class Raskrsnica:
         return self._koordinate
     
     @staticmethod
-    def Generisi_raskrsnice(broj_raskrsnica : int, dimenzije_ekrana : tuple[int, int]) -> list[Raskrsnica]:
+    def Generisi_raskrsnice(broj_raskrsnica : int, dimenzije_ekrana : tuple[int, int]) -> list:
         raskrsnice = []
         sirina, visina = dimenzije_ekrana
         for i in range(broj_raskrsnica):
