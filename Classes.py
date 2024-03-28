@@ -1,69 +1,70 @@
 
-class Road:
+class Put:
     
-    def __init__(self, lenght : int, max_speed : int, id : int, id_crossroads : tuple[int, int], traffic_light : TrafficLight) -> None:
-        self._lenght = lenght
-        self._max_speed = max_speed
+    def __init__(self, duzina : int, max_brzina : int, id : int, id_raskrsnica : tuple[int, int], semafor : Prepreka) -> None:
+        self._duzina = duzina
+        self._max_brzina = max_brzina
         self._id = id
-        self._id_crossroads = id_crossroads
-        self._traffic_lights = traffic_light
-        self.space = [None for _ in range(lenght)]
-        self._can_join = True
+        self._id_raskrsnica = id_raskrsnica
+        self._semafor = semafor
+        self.prostor_na_ulici = [None for _ in range(duzina)]
+        self._slobodno_mesto = duzina
     
-    def GetId(self):
+    def UzmiId(self):
         return self._id
 
-    def GetMaxSpeed(self):
-        return self._max_speed
+    def UzmiMaxBrzinu(self):
+        return self._max_brzina
 
-    def GetCrossroads(self):
-        return self._id_crossroads
+    def UzmiRaskrsnice(self):
+        return self._id_raskrsnica
 
-    def GetTrafficLight(self):
-        return self._traffic_lights._able_to_pass
+    def ProveriSemafor(self):
+        return self._semafor._stanje
     
-    def UpdateTrafficLight(self):
-        self._traffic_lights = self._traffic_lights.Update()
+    def AzurirajSemafor(self):
+        self._semafor = self._semafor.Azuriraj()
     
-    def CanJoin(self):
-        return self._can_join
+    def ImaMesta(self):
+        return self._slobodno_mesto
 
-    def Move(self):
-        self.UpdateTrafficLight()
-        if self.GetTrafficLight():
-            wichle = self.space[-1]
-            self.space = [None] + self.space[:-1]
-            return wichle
+    def PomeriVozila(self):
+        self.AzurirajSemafor()
+        if self.ProveriSemafor():
+            vozilo = self.prostor_na_ulici[-1]
+            self.prostor_na_ulici = [None] + self.prostor_na_ulici[:-1]
+            return vozilo
         else:
-            for i in range(self._lenght - 1, 0, -1):
-                if self.space[i] == None:
-                    self.space[:i] = [None] + self.space[:i - 1]
+            for i in range(self._duzina - 1, 0, -1):
+                if self.prostor_na_ulici[i] == None:
+                    self.prostor_na_ulici[:i] = [None] + self.prostor_na_ulici[:i - 1]
+                    return
     
-    def AddWichle(self, wichle : Wichle):
-        self.space[:wichle.GetLenght()] = wichle
+    def DodajVozilo(self, vozilo : Vozilo): # Mora da se pozove iskljucivo nakon provere da li ima prostora na ulici za dato vozilo !!
+        self.prostor_na_ulici[:vozilo.UzmiDuzinu()] = vozilo
 
 
-class Wichle:
+class Vozilo:
 
-    def __init__(self, type : str, id : int) -> None:
-        self._type = type
+    def __init__(self, tip : str, id : int) -> None:
+        self._tip = tip
         self._id = id
-        self._lenght = None
-        self._speed = None
-        if type == 'car':
-            self._speed = 5
-            self._lenght = 2
+        self._duzina = None
+        self._brzina = None
+        if tip == 'auto':
+            self._brzina = 5
+            self._duzina = 2
         else:
-            raise Exception("Undefined wichle type!")
+            raise Exception("Nedefinisan tip vozila!")
     
-    def GetLenght(self):
-        return self._lenght
+    def UzmiDuzinu(self):
+        return self._duzina
     
-    def GetId(self):
+    def UzmiId(self):
         return self._id
     
-    def GetSpeed(self):
-        return self._speed
+    def UzmiBrzinu(self):
+        return self._brzina
     
-    def GetType(self):
-        return self._type
+    def UzmiTip(self):
+        return self._tip
