@@ -23,7 +23,7 @@ class Put:
         return self._semafor._stanje
     
     def AzurirajSemafor(self):
-        self._semafor = self._semafor.Azuriraj()
+        self._semafor = self._semafor.Promeni_stanje()
     
     def ImaMesta(self):
         return self._slobodno_mesto
