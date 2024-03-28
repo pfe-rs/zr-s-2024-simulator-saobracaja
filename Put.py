@@ -10,6 +10,9 @@ class Put:
         self._semafor = semafor
         self.prostor_na_ulici = [None for _ in range(duzina)]
         self._slobodno_mesto = duzina
+
+    def Uzmi_duzinu(self) -> int:
+        return self._duzina
     
     def Uzmi_id(self) -> int:
         return self._id
@@ -28,18 +31,6 @@ class Put:
     
     def Ima_mesta(self) -> int:
         return self._slobodno_mesto
-
-    def Pomeri_vozila(self) -> Vozilo:
-        self.Azuriraj_semafor()
-        if self.Proveri_semafor():
-            vozilo = self.prostor_na_ulici[-1]
-            self.prostor_na_ulici = [None] + self.prostor_na_ulici[:-1]
-            return vozilo
-        else:
-            for i in range(self._duzina - 1, 0, -1):
-                if self.prostor_na_ulici[i] == None:
-                    self.prostor_na_ulici[:i] = [None] + self.prostor_na_ulici[:i - 1]
-                    return
     
     def Dodaj_vozilo(self, vozilo : Vozilo) -> None:    # Mora da se pozove iskljucivo nakon provere da li ima prostora na ulici za dato vozilo !!
         self.prostor_na_ulici[:vozilo.Uzmi_duzinu()] = vozilo

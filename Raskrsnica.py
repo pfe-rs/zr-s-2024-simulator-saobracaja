@@ -11,18 +11,6 @@ class Raskrsnica:
 
     def Uzmi_koordinate(self) -> tuple[int, int]:
         return self._koordinate
-    
-    @staticmethod
-    def Generisi_raskrsnice(broj_raskrsnica : int, dimenzije_ekrana : tuple[int, int]) -> list:
-        raskrsnice = []
-        sirina, visina = dimenzije_ekrana
-        for i in range(broj_raskrsnica):
-            x = random.randint(10, sirina - 10)
-            y = random.randint(10, visina - 10)
-            raskrsnica = Raskrsnica(i, (x, y))
-            raskrsnice.append(raskrsnica)
-        
-        return raskrsnice
 
 
 class Garaza(Raskrsnica):
