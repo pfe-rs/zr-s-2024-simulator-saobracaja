@@ -1,3 +1,5 @@
+from Vozilo import Vozilo
+
 class Put:
     
     def __init__(self, duzina : int, max_brzina : int, id : int, id_raskrsnica : tuple[int, int], semafor) -> None:

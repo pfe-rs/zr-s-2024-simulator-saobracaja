@@ -46,7 +46,7 @@ class Garaza(Raskrsnica):
     
     def Stvori_vozilo(self):
         tip = random.choice(Garaza.dostupni_tipovi_vozila)
-        id = self.Uzmi_id() + "_" + self.Uzmi_broj_vozila()
+        id = str(self.Uzmi_id()) + "_" + str(self.Uzmi_broj_vozila())
         self.Uvecaj_broj_vozila()
         vozilo = Vozilo(tip, id)
         return vozilo
