@@ -15,7 +15,6 @@ class Raskrsnica:
     @staticmethod
     def Generisi_raskrsnice(broj_raskrsnica : int, dimenzije_ekrana : tuple[int, int]) -> list[Raskrsnica]:
         raskrsnice = []
-        broj_raskrsnica = 10
         sirina, visina = dimenzije_ekrana
         for i in range(broj_raskrsnica):
             x = random.randint(10, sirina - 10)
