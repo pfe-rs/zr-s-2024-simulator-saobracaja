@@ -9,6 +9,8 @@ class Raskrsnica:
         self._izlazni_putevi = []
         self._koordinate = koordinate
 
+    def Uzmi_koordinate(self):
+        return self._koordinate
 
 class Garaza(Raskrsnica):
 
