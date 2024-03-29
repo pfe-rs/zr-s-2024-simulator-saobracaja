@@ -2,7 +2,7 @@ from Vozilo import Vozilo
 
 class Put:
     
-    def __init__(self, duzina : int, max_brzina : int, id : int, id_raskrsnica : tuple[int, int], semafor) -> None:
+    def __init__(self, duzina : int, max_brzina : int, id : int, id_raskrsnica : tuple[int, int], semafor = None) -> None:
         self._duzina = duzina
         self._max_brzina = max_brzina
         self._id = id
@@ -24,7 +24,7 @@ class Put:
         return self._id_raskrsnica
 
     def Proveri_semafor(self):
-        return self._semafor._stanje
+        return self._semafor.stanje
     
     def Azuriraj_semafor(self) -> None:
         self._semafor = self._semafor.Promeni_stanje()
