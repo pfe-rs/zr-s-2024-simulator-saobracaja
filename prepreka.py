@@ -3,24 +3,24 @@ import random, time, abc
 class Prepreka:
     __metaclass__ = abc.ABCMeta
 
-    def __init__(self):
-        self.stanje = True
+    def __init__(self, pocetno_stanje):
+        self.stanje = pocetno_stanje
     
     @abc.abstractmethod
     def Promeni_stanje(self):
         ...
 
 class Semafor(Prepreka):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, pocetno_stanje):
+        super().__init__(pocetno_stanje)
     
     def Promeni_stanje(self):
         time.sleep(2)
         self.stanje = not self.stanje
 
 class Prelaz(Prepreka):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, pocetno_stanje):
+        super().__init__(pocetno_stanje)
     
     def Promeni_stanje(self):
         time.sleep(10 * random.random())

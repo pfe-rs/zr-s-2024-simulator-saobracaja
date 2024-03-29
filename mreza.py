@@ -1,8 +1,7 @@
 from Put import Put
 from Raskrsnica import Raskrsnica, Garaza
 from Vozilo import Vozilo
-#from Classes import Put, Raskrsnica, Garaza, Vozilo
-from prepreka import Semafor
+from prepreka import Semafor, Prelaz
 import random
 
 class Mreza: 
