@@ -9,9 +9,22 @@ def Nacrtaj_raskrsnicu(raskrsnica : Raskrsnica, ekran, boja : tuple[int, int, in
 
 @staticmethod
 def Nacrtaj_put(put : Put, ekran, boja : tuple[int, int, int], r : int, raskrsnice : list[Raskrsnica]):
+    x1, y1 = Trazena_raskrsnica(raskrsnice, put.Uzmi_raskrsnice()[0]).Uzmi_koordinate()
+    x2, y2 = Trazena_raskrsnica(raskrsnice, put.Uzmi_raskrsnice()[1]).Uzmi_koordinate()
+
+    pg.draw.line(ekran, boja, (x1, y1), (x2, y2), r)
+
+@staticmethod
+def Trazena_raskrsnica(raskrsnice : list [Raskrsnica], id : int) -> Raskrsnica:
     for raskrsnica in raskrsnice:
-        pass
-    pg.draw.line(ekran, boja, )
+        if id == raskrsnica.Uzmi_id():
+            return raskrsnica
+
+@staticmethod
+def Pronadjen(lista : list[tuple[int, int]], tuple : tuple[int, int]):
+    for clan in lista:
+        if clan == tuple: return True
+    return False
 
 pg.init()
 
@@ -58,7 +71,7 @@ while radi:
 
     for raskrsnica in mreza.raskrsnice:
         Nacrtaj_raskrsnicu(raskrsnica, ekran, crna, 9)
-    """
+    
     iscrtani_putevi = []
     for put in mreza.putevi:
         pocetak, kraj = put.Uzmi_raskrsnice()
@@ -67,7 +80,6 @@ while radi:
         else: r = 5
 
         Nacrtaj_put(put, ekran, crna, r, mreza.raskrsnice)
-    """
 
     pg.display.flip()
 
