@@ -12,6 +12,9 @@ class Raskrsnica:
     def Uzmi_koordinate(self) -> tuple[int, int]:
         return self._koordinate
 
+    def Uzmi_id(self) -> int:
+        return self._id
+
 
 class Garaza(Raskrsnica):
 
