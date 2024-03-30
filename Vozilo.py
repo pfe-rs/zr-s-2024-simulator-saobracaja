@@ -1,3 +1,4 @@
+from Put import Put
 import random
 
 class Vozilo:
@@ -14,7 +15,7 @@ class Vozilo:
         else:
             raise Exception("Nedefinisan tip vozila!")
     
-    def Pomeri_vozilo(self, put):
+    def Pomeri_vozilo(self, put : Put):
         put.Azuriraj_semafor()
         brzina = min(put.Uzmi_max_brzinu(), self.Uzmi_brzinu())
         mesto = self.Uzmi_mesto_na_putu()
