@@ -14,14 +14,21 @@ class Vozilo:
         else:
             raise Exception("Nedefinisan tip vozila!")
     
-    def Pomeri_vozilo(self, put):
+    def Pomeri_vozilo(self, put, sledeca_raskrsnica_id, putevi):
         put.Azuriraj_semafor()
         brzina = min(put.Uzmi_max_brzinu(), self.Uzmi_brzinu())
         mesto = self.Uzmi_mesto_na_putu()
         promena_mesta = 0
         if put.Proveri_semafor():
             if mesto + brzina >= put.Uzmi_duzinu():
-                pass # ovde mora da prodje kroz raskrsnicu
+                sledeci_put_id_raskrsnica = (put.Uzmi_raskrsnice()[1], sledeca_raskrsnica_id)
+                for put in putevi:
+                    if put.Uzmi_raskrsnice() == sledeci_put_id_raskrsnica:
+                        trazeni_put = put
+                
+                trazeni_put.Dodaj_vozilo(self)
+                self._mesto_na_putu[mesto:] = None
+
             else:
                 for i in range(brzina):
                     if put.prostor_na_ulici[mesto + i] == None:
@@ -35,32 +42,27 @@ class Vozilo:
             queue = []
             queue.append(mreza.raskrsnice[0])
             while len(queue) != 0:
-                front = queue[len(queue) - 1]
-                #print(f"{front._id}")
+                tren_raskrsnica = queue[len(queue) - 1]
                 queue.pop()
-                nextNode = random.choice(front._izlazni_putevi)
-                endConns = (front._id, nextNode)
+                sledeca_raskrsnica_id = random.choice(tren_raskrsnica._izlazni_putevi)
+                trazeni_put = (tren_raskrsnica._id, sledeca_raskrsnica_id)
                 for put in mreza.putevi:
-                    if put._id_raskrsnica == endConns:
-                        currentRoad = put
+                    if put.Uzmi_id() == trazeni_put:
+                        trenutni_put = put
 
-                for put in mreza.putevi:
-                    if put._id_raskrsnica == endConns:
-                        putID, voziloID = put._id, self._id
-                        print(f"({putID}, {voziloID})")
+                self.Pomeri_vozilo(trenutni_put, sledeca_raskrsnica_id, mreza.putevi)
 
-                if currentRoad._semafor == None:
+                if trenutni_put._semafor == None:
                     for raskrsnica in mreza.raskrsnice:
-                        if raskrsnica._id == nextNode:
+                        if raskrsnica._id == sledeca_raskrsnica_id:
                             queue.append(raskrsnica)
                 else:
                     # Doesn't support threading for now
-                    if not currentRoad._semafor.stanje:
-                        currentRoad.Azuriraj_semafor()
-                    print("Zeleno")
+                    if not trenutni_put._semafor.stanje:
+                        trenutni_put.Azuriraj_semafor()
                     
                     for raskrsnica in mreza.raskrsnice:
-                        if raskrsnica._id == nextNode:
+                        if raskrsnica._id == sledeca_raskrsnica_id:
                             queue.append(raskrsnica)
 
 
